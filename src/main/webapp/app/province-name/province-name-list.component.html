@@ -1,0 +1,35 @@
+<div class="flex flex-wrap mb-6">
+    <h1 class="grow text-3xl md:text-4xl font-medium mb-2" i18n="@@provinceName.list.headline">Province Names</h1>
+    <div>
+        <a routerLink="/provinceNames/add" class="inline-block text-white bg-blue-600 hover:bg-blue-700 focus:ring-blue-300  focus:ring-4 rounded px-5 py-2" i18n="@@provinceName.list.createNew">Create new Province Name</a>
+    </div>
+</div>
+@if (!provinceNames || provinceNames.length === 0) {
+<div i18n="@@provinceName.list.empty">No Province Names could be found.</div>
+} @else {
+<div class="overflow-x-auto">
+    <table class="w-full">
+        <thead>
+            <tr>
+                <th scope="col" class="text-left p-2" i18n="@@provinceName.provinceId.label">Province Id</th>
+                <th scope="col" class="text-left p-2" i18n="@@provinceName.provinceName.label">Province Name</th>
+                <th><!-- --></th>
+            </tr>
+        </thead>
+        <tbody class="border-t-2 border-black">
+            @for (provinceName of provinceNames; track provinceName.provinceId) {
+            <tr class="odd:bg-gray-100">
+                <td class="p-2">{{ provinceName.provinceId }}</td>
+                <td class="p-2">{{ provinceName.provinceName }}</td>
+                <td class="p-2">
+                    <div class="float-right whitespace-nowrap">
+                        <a [routerLink]="['/provinceNames/edit', provinceName.provinceId]" class="inline-block text-white bg-gray-500 hover:bg-gray-600 focus:ring-gray-200 focus:ring-3 rounded px-2.5 py-1.5 text-sm" i18n="@@provinceName.list.edit">Edit</a>
+                        <button type="button" (click)="confirmDelete(provinceName.provinceId!)" class="inline-block text-white bg-gray-500 hover:bg-gray-600 focus:ring-gray-200 focus:ring-3 rounded px-2.5 py-1.5 text-sm" i18n="@@provinceName.list.delete">Delete</button>
+                    </div>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>
+}

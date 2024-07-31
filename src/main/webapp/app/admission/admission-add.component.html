@@ -1,0 +1,14 @@
+<div class="flex flex-wrap mb-6">
+    <h1 class="grow text-3xl md:text-4xl font-medium mb-2" i18n="@@admission.add.headline">Add Admission</h1>
+    <div>
+        <a routerLink="/admissions" class="inline-block text-white bg-gray-500 hover:bg-gray-600 focus:ring-gray-200 focus:ring-4 rounded px-5 py-2" i18n="@@admission.add.back">Back to list</a>
+    </div>
+</div>
+<form [formGroup]="addForm" (ngSubmit)="handleSubmit()">
+    <app-input-row [group]="addForm" field="admissionDate" datepicker="datepicker" i18n-label="@@admission.admissionDate.label" label="Admission Date" />
+    <app-input-row [group]="addForm" field="dischargeDate" datepicker="datepicker" i18n-label="@@admission.dischargeDate.label" label="Discharge Date" />
+    <app-input-row [group]="addForm" field="diagnosis" i18n-label="@@admission.diagnosis.label" label="Diagnosis" />
+    <app-input-row [group]="addForm" field="patient" rowType="select" [options]="patientValues" i18n-label="@@admission.patient.label" label="Patient" />
+    <app-input-row [group]="addForm" field="attendingDoctor" rowType="select" [options]="attendingDoctorValues" i18n-label="@@admission.attendingDoctor.label" label="Attending Doctor" />
+    <input type="submit" i18n-value="@@admission.add.headline" value="Add Admission" class="inline-block text-white bg-blue-600 hover:bg-blue-700 focus:ring-blue-300  focus:ring-4 rounded px-5 py-2 mt-6" />
+</form>

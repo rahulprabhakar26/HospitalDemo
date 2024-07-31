@@ -1,0 +1,39 @@
+<div class="flex flex-wrap mb-6">
+    <h1 class="grow text-3xl md:text-4xl font-medium mb-2" i18n="@@doctor.list.headline">Doctors</h1>
+    <div>
+        <a routerLink="/doctors/add" class="inline-block text-white bg-blue-600 hover:bg-blue-700 focus:ring-blue-300  focus:ring-4 rounded px-5 py-2" i18n="@@doctor.list.createNew">Create new Doctor</a>
+    </div>
+</div>
+@if (!doctors || doctors.length === 0) {
+<div i18n="@@doctor.list.empty">No Doctors could be found.</div>
+} @else {
+<div class="overflow-x-auto">
+    <table class="w-full">
+        <thead>
+            <tr>
+                <th scope="col" class="text-left p-2" i18n="@@doctor.doctorId.label">Doctor Id</th>
+                <th scope="col" class="text-left p-2" i18n="@@doctor.firstName.label">First Name</th>
+                <th scope="col" class="text-left p-2" i18n="@@doctor.lastName.label">Last Name</th>
+                <th scope="col" class="text-left p-2" i18n="@@doctor.specialty.label">Specialty</th>
+                <th><!-- --></th>
+            </tr>
+        </thead>
+        <tbody class="border-t-2 border-black">
+            @for (doctor of doctors; track doctor.doctorId) {
+            <tr class="odd:bg-gray-100">
+                <td class="p-2">{{ doctor.doctorId }}</td>
+                <td class="p-2">{{ doctor.firstName }}</td>
+                <td class="p-2">{{ doctor.lastName }}</td>
+                <td class="p-2">{{ doctor.specialty }}</td>
+                <td class="p-2">
+                    <div class="float-right whitespace-nowrap">
+                        <a [routerLink]="['/doctors/edit', doctor.doctorId]" class="inline-block text-white bg-gray-500 hover:bg-gray-600 focus:ring-gray-200 focus:ring-3 rounded px-2.5 py-1.5 text-sm" i18n="@@doctor.list.edit">Edit</a>
+                        <button type="button" (click)="confirmDelete(doctor.doctorId!)" class="inline-block text-white bg-gray-500 hover:bg-gray-600 focus:ring-gray-200 focus:ring-3 rounded px-2.5 py-1.5 text-sm" i18n="@@doctor.list.delete">Delete</button>
+                    </div>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>
+}
